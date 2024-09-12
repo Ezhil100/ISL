@@ -1,0 +1,44 @@
+from gtts import gTTS
+import os
+import pygame
+import time
+
+# Function to convert text to speech
+def text_to_speech(text):
+    # Specify the language ('en' for English)
+    language = 'en'
+
+    # Create a gTTS object for the given text
+    speech = gTTS(text=text, lang=language, slow=False)
+
+    # Save the speech to an audio file with a timestamp
+    file_name = f"speech_{int(time.time())}.mp3"
+    speech.save(file_name)
+    print(f"Speech saved as {file_name}")
+
+    # Initialize the pygame mixer for playing audio
+    pygame.mixer.init()
+
+    # Play the audio file using pygame
+    pygame.mixer.music.load(file_name)
+    pygame.mixer.music.play()
+
+    # Wait until the sound finishes playing
+    while pygame.mixer.music.get_busy():
+        time.sleep(0.1)  # Sleep for a short time to allow audio to play
+
+    # Quit the mixer after the sound has finished playing
+    pygame.mixer.quit()
+
+# Example usage
+if __name__ == "__main__":
+    while True:
+        # Get input text from the user
+        user_input = input("Enter text to convert to speech (or 'exit' to quit): ")
+
+        # Exit the loop if the user types 'exit'
+        if user_input.lower() == 'exit':
+            break
+
+        # Convert the input text to speech and play it
+        text_to_speech(user_input)
