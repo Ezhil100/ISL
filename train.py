@@ -37,3 +37,7 @@ model.fit(X_train, y_train, epochs=30, validation_data=(X_test, y_test))
 model.save('isl_gesture_model.h5')
 with open('label_encoder.pkl', 'wb') as f:
     pickle.dump(label_encoder, f)
+
+
+
+#Hello my friend how r u
